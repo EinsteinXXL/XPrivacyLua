@@ -47,8 +47,9 @@ Standard Restrictions (official build)
 * Get messages (MMS, SMS, SIM, voicemail)
 * Read account name (mostly e-mail address)
 * Read clipboard
+* Read identifiers
 * Read sensors
-* read phone data
+* Read phone data
 * Record audio
 * Record video
 * Use camera (take pictures)
@@ -137,8 +138,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with XPrivacyLua. If not, see [English Version] (https://www.gnu.org/licenses/).
-                                    [German version] (http://www.gnu.de/documents/gpl.de.html)
+along with XPrivacyLua. If not, see [English Version](https://www.gnu.org/licenses/). [German version](http://www.gnu.de/documents/gpl.de.html)
 									
 									
 Trademarks
