@@ -54,14 +54,6 @@ Standard Restrictions (official build)
 * Use camera (take pictures)
 
 
-Reenabled Restrictions (unofficial build)
------------------------------------------
-
-* Sensor Data
-* Phone Data (IMEI, SubscriberID, SIM-Serial, ...)
-
-
-
 Compatibility
 -------------
 
