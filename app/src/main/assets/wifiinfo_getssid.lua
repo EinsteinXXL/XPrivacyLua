@@ -15,8 +15,12 @@
 
 -- Copyright 2017-2018 Marcel Bokhorst (M66B)
 
-function before(hook, param)
-    local source = param:getArgument(0)
-    param:putValue('source', source, param:getThis())
-    return false
+function after(hook, param)
+    local result = param:getResult()
+    if result == nil then
+        return false
+    else
+        param:setResult('private')
+        return true
+    end
 end

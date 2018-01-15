@@ -106,9 +106,10 @@ public class XParam {
     public void setArgument(int index, Object value) {
         if (index < 0 || index >= this.paramTypes.length)
             throw new ArrayIndexOutOfBoundsException("Argument #" + index);
-        if (value != null && !this.paramTypes[index].isInstance(value))
+
+        if (value != null && !boxType(this.paramTypes[index]).isInstance(value))
             throw new IllegalArgumentException(
-                    "Expected argument #" + index + " " + this.paramTypes[index] + " got " + value);
+                    "Expected argument #" + index + " " + this.paramTypes[index] + " got " + value.getClass());
         this.param.args[index] = value;
     }
 
@@ -139,7 +140,7 @@ public class XParam {
                 this.param.setThrowable((Throwable) result);
             else {
                 Log.i(TAG, "Set " + this.packageName + ":" + this.uid + " result=" + result);
-                if (result != null && !this.returnType.isInstance(result))
+                if (result != null && !boxType(this.returnType).isInstance(result))
                     throw new IllegalArgumentException("Expected return " + this.returnType + " got " + result);
                 this.param.setResult(result);
             }
@@ -157,29 +158,39 @@ public class XParam {
     }
 
     @SuppressWarnings("unused")
-    public void putValue(String name, Object value) {
-        Log.i(TAG, "Put value " + this.packageName + ":" + this.uid + " " + name + "=" + value);
+    public void putValue(String name, Object value, Object scope) {
+        Log.i(TAG, "Put value " + this.packageName + ":" + this.uid + " " + name + "=" + value + " @" + scope);
         synchronized (nv) {
-            if (!nv.containsKey(this.param.thisObject))
-                nv.put(this.param.thisObject, new HashMap<String, Object>());
-            nv.get(this.param.thisObject).put(name, value);
+            if (!nv.containsKey(scope))
+                nv.put(scope, new HashMap<String, Object>());
+            nv.get(scope).put(name, value);
         }
     }
 
     @SuppressWarnings("unused")
-    public Object getValue(String name) {
-        Object value = getValueInternal(name);
-        Log.i(TAG, "Get value " + this.packageName + ":" + this.uid + " " + name + "=" + value);
+    public Object getValue(String name, Object scope) {
+        Object value = getValueInternal(name, scope);
+        Log.i(TAG, "Get value " + this.packageName + ":" + this.uid + " " + name + "=" + value + " @" + scope);
         return value;
     }
 
-    private Object getValueInternal(String name) {
+    private static Object getValueInternal(String name, Object scope) {
         synchronized (nv) {
-            if (!nv.containsKey(this.param.thisObject))
+            if (!nv.containsKey(scope))
                 return null;
-            if (!nv.get(this.param.thisObject).containsKey(name))
+            if (!nv.get(scope).containsKey(name))
                 return null;
-            return nv.get(this.param.thisObject).get(name);
+            return nv.get(scope).get(name);
         }
+    }
+
+    private static Class<?> boxType(Class<?> type) {
+        if (type == boolean.class)
+            return Boolean.class;
+        else if (type == int.class)
+            return Integer.class;
+        else if (type == long.class)
+            return Long.class;
+        return type;
     }
 }

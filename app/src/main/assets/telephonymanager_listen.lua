@@ -16,7 +16,34 @@
 -- Copyright 2017-2018 Marcel Bokhorst (M66B)
 
 function before(hook, param)
-    local source = param:getArgument(0)
-    param:putValue('source', source, param:getThis())
-    return false
+    local restricted = false;
+    local events = param:getArgument(1)
+    if hasbit(events, 16) then -- cell location
+        restricted = true
+        events = clearbit(events, 16)
+    end
+    if hasbit(events, 1024) then -- cell info
+        restricted = true
+        events = clearbit(events, 1024)
+    end
+    if restricted then
+        param:setArgument(1, events)
+    end
+    return restricted
+end
+
+function bit(p)
+    return 2 ^ (p - 1)
+end
+
+function hasbit(x, p)
+    return x % (p + p) >= p
+end
+
+function setbit(x, p)
+    return hasbit(x, p) and x or x + p
+end
+
+function clearbit(x, p)
+    return hasbit(x, p) and x - p or x
 end

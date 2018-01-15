@@ -54,6 +54,7 @@ public class XHook {
     private int minSdk;
     private int maxSdk;
     private boolean enabled;
+    private boolean optional;
     private boolean notify;
 
     private String luaScript;
@@ -115,6 +116,10 @@ public class XHook {
         return this.enabled;
     }
 
+    public boolean isOptional() {
+        return this.optional;
+    }
+
     public String getLuaScript() {
         return this.luaScript;
     }
@@ -167,33 +172,55 @@ public class XHook {
 
                     // Resolve class names
                     if ("android.app.ActivityManager".equals(hook.className)) {
-                        String className = context.getSystemService(ActivityManager.class).getClass().getName();
-                        hook.className = className;
-                        Log.i(TAG, hook.getId() + " class name=" + className);
+                        Object service = context.getSystemService(ActivityManager.class);
+                        if (service != null) {
+                            String className = service.getClass().getName();
+                            hook.className = className;
+                        }
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
                     } else if ("android.hardware.camera2.CameraManager".equals(hook.className)) {
-                        String className = context.getSystemService(CameraManager.class).getClass().getName();
-                        hook.className = className;
-                        Log.i(TAG, hook.getId() + " class name=" + className);
+                        Object service = context.getSystemService(CameraManager.class);
+                        if (service != null) {
+                            String className = service.getClass().getName();
+                            hook.className = className;
+                        }
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
                     } else if ("android.content.ContentResolver".equals(hook.className)) {
                         String className = context.getContentResolver().getClass().getName();
                         hook.className = className;
-                        Log.i(TAG, hook.getId() + " class name=" + className);
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
                     } else if ("android.content.pm.PackageManager".equals(hook.className)) {
                         String className = context.getPackageManager().getClass().getName();
                         hook.className = className;
-                        Log.i(TAG, hook.getId() + " class name=" + className);
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
                     } else if ("android.hardware.SensorManager".equals(hook.className)) {
-                        String className = context.getSystemService(SensorManager.class).getClass().getName();
-                        hook.className = className;
-                        Log.i(TAG, hook.getId() + " class name=" + className);
+                        Object service = context.getSystemService(SensorManager.class);
+                        if (service != null) {
+                            String className = service.getClass().getName();
+                            hook.className = className;
+                        }
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
                     } else if ("android.telephony.SmsManager".equals(hook.className)) {
-                        String className = SmsManager.getDefault().getClass().getName();
-                        hook.className = className;
-                        Log.i(TAG, hook.getId() + " class name=" + className);
+                        Object service = SmsManager.getDefault();
+                        if (service != null) {
+                            String className = service.getClass().getName();
+                            hook.className = className;
+                        }
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
                     } else if ("android.telephony.TelephonyManager".equals(hook.className)) {
-                        String className = context.getSystemService(Context.TELEPHONY_SERVICE).getClass().getName();
-                        hook.className = className;
-                        Log.i(TAG, hook.getId() + " class name=" + className);
+                        Object service = context.getSystemService(Context.TELEPHONY_SERVICE);
+                        if (service != null) {
+                            String className = service.getClass().getName();
+                            hook.className = className;
+                        }
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
+                    } else if ("android.net.wifi.WifiManager".equals(hook.className)) {
+                        Object service = context.getSystemService(Context.WIFI_SERVICE);
+                        if (service != null) {
+                            String className = service.getClass().getName();
+                            hook.className = className;
+                        }
+                        Log.i(TAG, hook.getId() + " class name=" + hook.className);
                     }
 
                     hooks.add(hook);
@@ -241,6 +268,7 @@ public class XHook {
         jroot.put("minSdk", this.minSdk);
         jroot.put("maxSdk", this.maxSdk);
         jroot.put("enabled", this.enabled);
+        jroot.put("optional", this.optional);
         jroot.put("notify", this.notify);
 
         jroot.put("luaScript", this.luaScript);
@@ -273,6 +301,7 @@ public class XHook {
         hook.minSdk = jroot.getInt("minSdk");
         hook.maxSdk = (jroot.has("maxSdk") ? jroot.getInt("maxSdk") : 999);
         hook.enabled = (jroot.has("enabled") ? jroot.getBoolean("enabled") : true);
+        hook.optional = (jroot.has("optional") ? jroot.getBoolean("optional") : false);
         hook.notify = (jroot.has("notify") ? jroot.getBoolean("notify") : false);
 
         hook.luaScript = jroot.getString("luaScript");
