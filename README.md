@@ -1,11 +1,32 @@
-XPrivacyLua
-===========
+XPrivacyLua (unofficial)
+========================
 
 
 Really simple to use privacy manager for Android 6.0 Marshmallow and later (successor of [XPrivacy](https://forum.xda-developers.com/xposed/modules/xprivacy-ultimate-android-privacy-app-t2320783"]XPrivacy[/URL])).
 
 Revoking Android permissions from apps often let apps crash or malfunction.
 XPrivacyLua solves this by feeding apps fake data instead of real data.
+
+
+What are the changes in the unofficial build? 
+---------------------------------------------
+
+Since version 0.17, the main developer M66B decided not to integrate tracking protection in XPrivacyLua.
+
+see [here:](https://forum.xda-developers.com/showpost.php?p=75160338&postcount=301)
+
+That's why I decided to make this fork. I would like to point out that I haven't written any code myself yet. 
+Only the restrictions deactivated by M66B were reactivated in the source code (Lua Script).
+
+I will try to keep this synced to the official builds. For the future I planning to extend the protection against tracking and more. 
+However, it will take some time to add own code, because I have just started learning Java programming.
+Forgive me if my first coding attempts may not be as accurate and neatly written as M66B is.
+
+
+EDIT: He has changed his mind and since v0.21 he integrates tracking protection again.
+
+PLEASE USE THE OFFICIAL VERSION. THIS FORK IS FOR MY PRIVATE USE AND RESEARCH!
+Really simple to use privacy manager for Android 6.0 Marshmallow and later (successor of [XPrivacy](https://forum.xda-developers.com/xposed/modules/xprivacy-ultimate-android-privacy-app-t2320783"]XPrivacy[/URL])).
 
 Features
 --------
@@ -109,7 +130,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with XPrivacyLua. If not, see [https://www.gnu.org/licenses/](https://www.gnu.org/licenses/).
+along with XPrivacyLua. If not, see [English Version](https://www.gnu.org/licenses/). [German version](http://www.gnu.de/documents/gpl.de.html)
 
 Trademarks
 ----------
