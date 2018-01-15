@@ -7,6 +7,10 @@ Really simple to use privacy manager for Android 6.0 Marshmallow and later (succ
 Revoking Android permissions from apps often let apps crash or malfunction.
 XPrivacyLua solves this by feeding apps fake data instead of real data.
 
+EDIT: He has changed his mind and since v0.21 he reintegrates and extend tracking protection.
+
+PLEASE USE THE OFFICIAL VERSION. THIS FORK IS FOR MY PRIVATE USE AND RESEARCH!
+
 
 What are the changes in the unofficial build? 
 ---------------------------------------------
@@ -21,12 +25,6 @@ Only the restrictions deactivated by M66B were reactivated in the source code (L
 I will try to keep this synced to the official builds. For the future I planning to extend the protection against tracking and more. 
 However, it will take some time to add own code, because I have just started learning Java programming.
 Forgive me if my first coding attempts may not be as accurate and neatly written as M66B is.
-
-
-EDIT: He has changed his mind and since v0.21 he integrates tracking protection again.
-
-PLEASE USE THE OFFICIAL VERSION. THIS FORK IS FOR MY PRIVATE USE AND RESEARCH!
-Really simple to use privacy manager for Android 6.0 Marshmallow and later (successor of [XPrivacy](https://forum.xda-developers.com/xposed/modules/xprivacy-ultimate-android-privacy-app-t2320783"]XPrivacy[/URL])).
 
 Features
 --------
